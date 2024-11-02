@@ -15,14 +15,16 @@ class Timer {
 
   start = () => {
     if (this.onStart) {
-      this.onStart();
+      this.onStart(this.timeRemaining);
     }
     this.tick();
-    this.interval = setInterval(this.tick, 50);
+    this.interval = setInterval(this.tick, 20);
+    this.startButton.disabled = true;
   };
 
   pause = () => {
     clearInterval(this.interval);
+    this.startButton.disabled = false;
   };
 
   tick = () => {
@@ -30,13 +32,18 @@ class Timer {
       this.pause();
       if (this.onComplete) {
         this.onComplete();
+        this.reset();
       }
     } else {
-      this.timeRemaining = this.timeRemaining - 0.05;
+      this.timeRemaining = this.timeRemaining - 0.02;
       if (this.onTick) {
-        this.onTick();
+        this.onTick(this.timeRemaining);
       }
     }
+  };
+
+  reset = () => {
+    this.timeRemaining = 10;
   };
 
   get timeRemaining() {
