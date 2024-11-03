@@ -25,5 +25,6 @@ const timer = new Timer(durationInput, startButton, restartButton, {
     console.log("Timer is completed");
     circle.setAttribute("stroke-dasharray", perimeter);
     circle.setAttribute("stroke-dashoffset", 0);
+    this.restart();
   },
 });

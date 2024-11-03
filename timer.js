@@ -7,6 +7,7 @@ class Timer {
 
     this.state = 0;
 
+    // If callbacks are provided, assign them to instance variables
     if (callbacks) {
       this.onStart = callbacks.onStart;
       this.onTick = callbacks.onTick;
@@ -14,6 +15,7 @@ class Timer {
       this.onComplete = callbacks.onComplete;
     }
 
+    // Event listener for the start/pause button
     this.startButton.addEventListener("click", () => {
       if (this.startButton.innerHTML === `<i class="fas fa-play"></i>`) {
         //  if you are starting timer for the first time
@@ -22,7 +24,7 @@ class Timer {
           this.start();
           this.state = 1;
         }
-        // If you paused the timer and want to resume
+        // resuming a paused timer
         else if (this.state === 2) {
           // If the inpuyt is changed on resume, restart the timer
           if (this.durationInput.value != this.timeRemaining) {
@@ -35,7 +37,7 @@ class Timer {
           }
         }
       }
-      //if the button icon is pause
+      //if the button shows pause and there is time remaining
       else if (
         this.startButton.innerHTML === `<i class="fas fa-pause"></i>` &&
         this.timeRemaining > 0
@@ -46,12 +48,12 @@ class Timer {
       }
     });
 
-    // Restart Button
+    // Event listener for Restart Button
     this.restartButton.addEventListener("click", () => {
       this.restart();
     });
 
-    // changing the input value will change the starting val and restart the timer
+    // Event listener for changes in the duration input
     this.durationInput.addEventListener("change", () => {
       this.pause();
       this.startingVal = this.durationInput.value;
